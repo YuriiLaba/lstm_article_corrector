@@ -132,7 +132,7 @@ class ArticleCorrector:
         for sample in data:
             predictions_ = []
 
-            for idx, t in enumerate(data):
+            for idx, t in enumerate(sample):
                 if t not in self.articles_list:
                     predictions_.append(None)
                 else:
