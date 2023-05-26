@@ -74,6 +74,8 @@ class ArticleCorrector:
         return padded_data, encoded_labels
 
     def train(self):
+        padded_train_data, encoded__train_labels = self.prepare_training_data()
+
         input_size = len(self.vocab)
         hidden_size = 256
         num_classes = 3
@@ -86,8 +88,6 @@ class ArticleCorrector:
 
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.Adam(model.parameters(), lr=learning_rate)
-
-        padded_train_data, encoded__train_labels = self.prepare_training_data()
 
         train_dataset = ArticlesDataset(padded_train_data, encoded__train_labels)
         train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
