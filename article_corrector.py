@@ -153,7 +153,7 @@ class ArticleCorrector:
                     predictions_.append([decoded_class, predicted_prob])
 
             predictions.append(predictions_)
-            return predictions
+        return predictions
 
 
 
