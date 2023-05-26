@@ -5,9 +5,10 @@ from torch import nn
 class BiLSTMClassifier(nn.Module):
     def __init__(self, input_size, hidden_size, num_classes):
         super(BiLSTMClassifier, self).__init__()
-        self.embedding = nn.Embedding(input_size, hidden_size)
-        self.lstm = nn.LSTM(hidden_size, hidden_size, batch_first=True, bidirectional=True)
-        self.fc = nn.Linear(hidden_size * 2, num_classes)  # Multiply by 2 for bidirectional
+        self.hidden_size = hidden_size
+        self.embedding = nn.Embedding(input_size, self.hidden_size)
+        self.lstm = nn.LSTM(self.hidden_size, self.hidden_size, batch_first=True, bidirectional=True)
+        self.fc = nn.Linear(self.hidden_size * 2, num_classes)  # Multiply by 2 for bidirectional
 
     def forward(self, x):
         embedded = self.embedding(x)
